@@ -1,5 +1,4 @@
 import * as React from 'react';
-import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
 const Navbar = () => {
@@ -10,6 +9,7 @@ const Navbar = () => {
             <Link to='/' className="btn btn-lg btn-dark-outline ml-auto">Home</Link>
             <Link to='/authorpage' className="btn btn-lg btn-dark-outline">Author Page</Link>
             <Link to='/donate' className="btn btn-lg btn-dark-outline">Donate to our Blog!</Link>
+            <Link to='/contact' className="btn btn-lg btn-dark-outline">Contact Us</Link>
         </div>
     )
 

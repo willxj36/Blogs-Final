@@ -18,9 +18,8 @@ const sendEmail = (to: string, from: string, subject: string, content: string) =
 
 router.post('/', async (req, res) => {
     try {
-        let result = await sendEmail('willxj36@gmail.com', req.body.email, req.body.subject, req.body.content);
-        console.log(result);
-        res.send('Email sent');
+        await sendEmail('willxj36@gmail.com', req.body.email, req.body.subject, req.body.content);
+        res.json({message: 'Email sent'});
     } catch(e) {
         console.log(e);
         res.status(500).json({message: 'Email failed to send, please try again'});
