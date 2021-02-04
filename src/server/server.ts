@@ -5,8 +5,6 @@ import * as passport from 'passport';
 import './middleware/localstrategy';
 import './middleware/bearerstrategy';
 
-require('dotenv').config(path.join(__dirname, '../.env'));
-
 const app = express();
 
 app.use(express.static('public'));
