@@ -36,7 +36,7 @@ const EditBlog: React.FC<RouteComponentProps> = ({ history }) => {
             let [blog] = await apiService(url); //get and set specific blog
             setBlog(blog);
 
-            let [currentTag] = await apiService(urlCurrentTag); //get blog's current tag to make it default for the select dropdown
+            let currentTag = await apiService(urlCurrentTag); //get blog's current tag to make it default for the select dropdown
             setCurrentTag(currentTag);
             
             let tags = await apiService(urlTags); //get all tags
