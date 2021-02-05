@@ -9,15 +9,7 @@ const EditBlog: React.FC<RouteComponentProps> = ({ history }) => {
 
     const { id } = useParams<{id: string}>();
 
-    const [blog, setBlog] = useState<Blog>({
-        id: null,
-        title: null,
-        content: null,
-        authorid: null,
-        author: null,
-        _created: null,
-        tag: null
-    });
+    const [blog, setBlog] = useState<Blog>(null);
     const [tags, setTags] = useState([]);
     const [currentTag, setCurrentTag] = useState<any>([]);
     const [title, setTitle] = useState<string>('');
