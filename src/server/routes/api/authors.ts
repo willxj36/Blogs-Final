@@ -7,6 +7,7 @@ const router = express.Router();
 router.get('/', async (req, res) => {
     try {
         let authors = await db.Authors.get();
+        authors.forEach(author => delete author.password);
         res.send(authors);
     } catch(e) {
         console.log(e);
@@ -14,11 +15,11 @@ router.get('/', async (req, res) => {
     }
 })
 
-router.put('/:id', isAdmin, (req, res) => {
+router.put('/:id', isAdmin, async (req, res) => {
     try {
         let user = req.body;
         let id = Number(req.params.id);
-        db.Authors.put(user, id);
+        await db.Authors.put(user, id);
         res.json({message: 'Author edited!'})
     } catch(e) {
         console.log(e);
