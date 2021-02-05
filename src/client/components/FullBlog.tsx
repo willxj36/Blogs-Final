@@ -16,11 +16,9 @@ const FullBlog = () => {
         author: null,
         authorid: null,
         _created: null,
-        _updated: null,
         tag: null
     });
     const [date, setDate] = useState<any>();
-    const [update, setUpdate] = useState<any>();
 
     useEffect(() => {
         (async() => {
@@ -33,10 +31,6 @@ const FullBlog = () => {
     useEffect(() => {
         let date = dayjs(`${blog._created}`).format('MMM DD, YYYY');
         setDate(date);
-        if (blog._updated) {
-            let update = dayjs(`${blog._updated}`).format('MMM DD, YYYY');
-            setUpdate(update);
-        }
     }, [blog]);
 
     return (
@@ -48,7 +42,6 @@ const FullBlog = () => {
             <p><span className="badge badge-warning">{blog.tag}</span></p>
             <h4 className="font-italic my-3">By {blog.author}</h4>
             <h4 className="text-muted my-3">{date}</h4>
-            {update ? <p className="my-2 text-muted">Edited on {update}</p> : null }
             <p className="mt-3">{blog.content}</p>
         </div>
     )
