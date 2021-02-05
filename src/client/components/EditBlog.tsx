@@ -16,7 +16,6 @@ const EditBlog: React.FC<RouteComponentProps> = ({ history }) => {
         authorid: null,
         author: null,
         _created: null,
-        _updated: null,
         tag: null
     });
     const [tags, setTags] = useState([]);
