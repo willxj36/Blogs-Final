@@ -8,7 +8,7 @@ router.get('/:id?', async (req, res, next) => {
     try {
         let id = Number(req.params.id);
         if(id) {
-            let blog = await db.Blogs.one(id);
+            let [blog] = await db.Blogs.one(id);
             res.send(blog);
         } else {
             let blogs = await db.Blogs.all();

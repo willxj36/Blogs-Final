@@ -9,7 +9,7 @@ const EditBlog: React.FC<RouteComponentProps> = ({ history }) => {
 
     const { id } = useParams<{id: string}>();
 
-    const [blog, setBlog] = useState<Blog>(null);
+    const [blog, setBlog] = useState<Blog>();
     const [tags, setTags] = useState([]);
     const [currentTag, setCurrentTag] = useState<any>([]);
     const [title, setTitle] = useState<string>('');
@@ -25,11 +25,8 @@ const EditBlog: React.FC<RouteComponentProps> = ({ history }) => {
         }
 
         (async () => {
-            let [blog] = await apiService(url); //get and set specific blog
+            let blog = await apiService(url); //get and set specific blog
             setBlog(blog);
-
-            setTitle(blog.title);
-            setContent(blog.content);
 
             let currentTag = await apiService(urlCurrentTag); //get blog's current tag to make it default for the select dropdown
             setCurrentTag(currentTag);
@@ -40,9 +37,13 @@ const EditBlog: React.FC<RouteComponentProps> = ({ history }) => {
     }, [id]);
 
     useEffect(() => {
-        if(User.userid !== blog.authorid && (User.role !== 'admin' && User.role !== 'webmaster')) { //after loading blog, makes sure that an 'author' role can only edit blogs that they posted. Admin can edit any
-            alert('You can only edit your own blogs!');
-            history.push('/authorpage');
+        if(blog) {
+            setTitle(blog.title);
+            setContent(blog.content);
+            if(User.userid != blog.authorid && (User.role !== 'admin' && User.role !== 'webmaster')) { //after loading blog, makes sure that an 'author' role can only edit blogs that they posted. Admin can edit any
+                alert('You can only edit your own blogs!');
+                history.push('/authorpage');
+            }
         }
     }, [blog]);
 
@@ -67,9 +68,9 @@ const EditBlog: React.FC<RouteComponentProps> = ({ history }) => {
     return (
         <div className="col container shadow border">
             <h5 className="form-label mt-4">Title</h5>
-            <input onChange={(e) => {handleTitle(e.currentTarget.value)}} type="text" name="title" id="title-edit" defaultValue={blog.title} className="form-control"/>
+            <input onChange={(e) => {handleTitle(e.currentTarget.value)}} type="text" name="title" id="title-edit" defaultValue={blog?.title} className="form-control"/>
             <h5 className="form-label mt-4">Content</h5>
-            <input onChange={(e) => {handleContent(e.currentTarget.value)}} type="text" name="content" id="content-edit" defaultValue={blog.content} className="form-control"/>
+            <input onChange={(e) => {handleContent(e.currentTarget.value)}} type="text" name="content" id="content-edit" defaultValue={blog?.content} className="form-control"/>
             <h5 className="form-label mt-4">Tags</h5>
             <select name="tags" id="tags-edit" className="mb-3">
                 <option value={currentTag.name}>{currentTag.name}</option>

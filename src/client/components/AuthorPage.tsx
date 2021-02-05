@@ -30,7 +30,7 @@ const AuthorPage: React.FC<RouteComponentProps> = ({ history }) => {
                 setBlogs(allBlogs);
             } else {
                 let blogs: Blog[] = allBlogs.filter(blog => { //makes it so that if user is an 'author', only the blogs they posted show up to be edited. For some reason, if I try to access a page an 'author' doesn't have permission for, this part of the page no longer works at all until I log out and back in. Not sure why.
-                    return blog.authorid === User.userid
+                    return blog.authorid == User.userid
                 })
                 setBlogs(blogs);
             }
