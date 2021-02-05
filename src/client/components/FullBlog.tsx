@@ -24,7 +24,7 @@ const FullBlog = () => {
         (async() => {
             const url = `/api/blogs/${id}`;
             let blog= await apiService(url);
-            setBlog(blog[0]);
+            setBlog(blog);
         })()
     }, [id]);
 
