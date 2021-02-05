@@ -20,7 +20,7 @@ const Register: React.FC<RouteComponentProps> = ({ history }) => {
 
     const handlePassword = (passText: string) => setPassword(passText);
 
-    const url = 'http://localhost:3000/auth/register';
+    const url = '/auth/register';
 
     const handleSubmit = async () => {
         try {

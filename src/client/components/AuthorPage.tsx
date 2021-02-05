@@ -13,8 +13,8 @@ const AuthorPage: React.FC<RouteComponentProps> = ({ history }) => {
     const [title, setTitle] = useState('');
     const [content, setContent] = useState('');
 
-    const blogUrl = 'http://localhost:3000/api/blogs';
-    const tagUrl = 'http://localhost:3000/api/tags';
+    const blogUrl = '/api/blogs';
+    const tagUrl = '/api/tags';
 
     useEffect(() => { 
         if(!User || User.userid === null) {
@@ -55,7 +55,7 @@ const AuthorPage: React.FC<RouteComponentProps> = ({ history }) => {
 
     const logout = async () => { //this seems like a janky and/or insecure method to logout, but it's the best I could figure as an extra thing to try and functions fine for the purpose of this lab
         localStorage.clear();
-        let url = `http://localhost:3000/auth/logout/${User.userid}`;
+        let url = `/auth/logout/${User.userid}`;
         await apiService(url);
         alert('Logged out successfully!');
         location.reload();

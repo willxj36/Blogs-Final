@@ -8,7 +8,7 @@ const AdminPage: React.FC<RouteComponentProps> = ({ history }) => {
 
     const [users, setUsers] = useState([]);
 
-    const url = 'http://localhost:3000/api/authors'
+    const url = '/api/authors'
 
     useEffect(() => {
         if(User.role !== 'admin' && User.role !== 'webmaster') {

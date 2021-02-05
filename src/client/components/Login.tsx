@@ -17,7 +17,7 @@ const Login: React.FC<RouteComponentProps> = ({ history }) => {
 
     const handlePassword = (passText: string) => setPassword(passText);
 
-    const url = 'http://localhost:3000/auth/login';
+    const url = '/auth/login';
 
     const handleSubmit = async () => {
         try {

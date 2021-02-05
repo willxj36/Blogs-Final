@@ -8,7 +8,7 @@ const Contact: React.FC = () => {
     const [subject, setSubject] = useState<string>('');
     const [content, setContent] = useState<string>('');
 
-    const url = 'http://localhost:3000/api/contact';
+    const url = '/api/contact';
     
     const submitHandle = async (e: React.MouseEvent<HTMLFormElement>) => {
         e.preventDefault();

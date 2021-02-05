@@ -24,9 +24,9 @@ const EditBlog: React.FC<RouteComponentProps> = ({ history }) => {
     const [title, setTitle] = useState<string>('');
     const [content, setContent] = useState<string>('');
 
-    const url = `http://localhost:3000/api/blogs/${id}`;
-    const urlTags = 'http://localhost:3000/api/tags';
-    const urlCurrentTag = `http://localhost:3000/api/blogtags/${id}`;
+    const url = `/api/blogs/${id}`;
+    const urlTags = '/api/tags';
+    const urlCurrentTag = `/api/blogtags/${id}`;
 
     useEffect(() => {
         if(!User || User.userid === null || User.role === 'guest') { //only allows author and above to any edit page

@@ -24,7 +24,7 @@ const FullBlog = () => {
 
     useEffect(() => {
         (async() => {
-            const url = `http://localhost:3000/api/blogs/${id}`;
+            const url = `/api/blogs/${id}`;
             let blog= await apiService(url);
             setBlog(blog[0]);
         })()

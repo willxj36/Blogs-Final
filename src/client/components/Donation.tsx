@@ -8,7 +8,7 @@ const Donation = () => {
     
     const stripe = useStripe();
     const elements = useElements();
-    const url = 'http://localhost:3000/api/donate';
+    const url = '/api/donate';
 
     const [name, setName] = useState<string>('');
     const [amount, setAmount] = useState<string>('');
