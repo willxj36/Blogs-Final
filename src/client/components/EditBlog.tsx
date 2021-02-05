@@ -20,8 +20,8 @@ const EditBlog: React.FC<RouteComponentProps> = ({ history }) => {
     });
     const [tags, setTags] = useState([]);
     const [currentTag, setCurrentTag] = useState<any>([]);
-    const [title, setTitle] = useState<string>(blog.title);
-    const [content, setContent] = useState<string>(blog.content);
+    const [title, setTitle] = useState<string>('');
+    const [content, setContent] = useState<string>('');
 
     const url = `/api/blogs/${id}`;
     const urlTags = '/api/tags';
@@ -35,6 +35,9 @@ const EditBlog: React.FC<RouteComponentProps> = ({ history }) => {
         (async () => {
             let [blog] = await apiService(url); //get and set specific blog
             setBlog(blog);
+
+            setTitle(blog.title);
+            setContent(blog.content);
 
             let currentTag = await apiService(urlCurrentTag); //get blog's current tag to make it default for the select dropdown
             setCurrentTag(currentTag);
