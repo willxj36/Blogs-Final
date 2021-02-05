@@ -20,8 +20,8 @@ const EditBlog: React.FC<RouteComponentProps> = ({ history }) => {
     });
     const [tags, setTags] = useState([]);
     const [currentTag, setCurrentTag] = useState<any>([]);
-    const [title, setTitle] = useState<string>('');
-    const [content, setContent] = useState<string>('');
+    const [title, setTitle] = useState<string>(blog.title);
+    const [content, setContent] = useState<string>(blog.content);
 
     const url = `/api/blogs/${id}`;
     const urlTags = '/api/tags';
