@@ -72,9 +72,9 @@ const EditBlog: React.FC<RouteComponentProps> = ({ history }) => {
     return (
         <div className="col container shadow border">
             <h5 className="form-label mt-4">Title</h5>
-            <input value={title} onChange={(e) => {handleTitle(e.currentTarget.value)}} type="text" name="title" id="title-edit" defaultValue={blog.title} className="form-control"/>
+            <input onChange={(e) => {handleTitle(e.currentTarget.value)}} type="text" name="title" id="title-edit" defaultValue={blog.title} className="form-control"/>
             <h5 className="form-label mt-4">Content</h5>
-            <input value={content} onChange={(e) => {handleContent(e.currentTarget.value)}} type="text" name="content" id="content-edit" defaultValue={blog.content} className="form-control"/>
+            <input onChange={(e) => {handleContent(e.currentTarget.value)}} type="text" name="content" id="content-edit" defaultValue={blog.content} className="form-control"/>
             <h5 className="form-label mt-4">Tags</h5>
             <select name="tags" id="tags-edit" className="mb-3">
                 <option value={currentTag.name}>{currentTag.name}</option>
