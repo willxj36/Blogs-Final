@@ -7,7 +7,7 @@ router.get('/:id', async (req: any, res) => {
         let userid = req.params.id;
         let response = await db.AccessTokens.deleter(userid);
         req.logout();
-        if(response.rowsAffected != 0) {
+        if(response) {
             res.sendStatus(200);
         } else {
             throw Error;
