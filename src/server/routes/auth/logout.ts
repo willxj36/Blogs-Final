@@ -8,7 +8,7 @@ router.get('/:id', async (req: any, res) => {
         let response = await db.AccessTokens.deleter(userid);
         req.logout();
         if(response) {
-            res.sendStatus(200);
+            res.json({status: 200});
         } else {
             throw Error;
         }
