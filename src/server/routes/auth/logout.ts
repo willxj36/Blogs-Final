@@ -5,9 +5,13 @@ import db from '../../db';
 router.get('/:id', async (req: any, res) => {
     try {
         let userid = req.params.id;
-        await db.AccessTokens.deleter(userid);
+        let response = await db.AccessTokens.deleter(userid);
         req.logout();
-        res.sendStatus(200);
+        if(response.rowsAffected != 0) {
+            res.sendStatus(200);
+        } else {
+            throw Error;
+        }
     } catch(e) {
         console.log(e);
         res.sendStatus(500);
