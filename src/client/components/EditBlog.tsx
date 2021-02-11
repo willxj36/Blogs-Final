@@ -56,7 +56,7 @@ const EditBlog: React.FC<RouteComponentProps> = ({ history }) => {
         await apiService(url, 'PUT', {
             title,
             content,
-            "tags": newTag});
+            "tags": [newTag]}); //Mobile app allows multiple tags and thus the server requires the tags in an array. Will probably experiment with implementing this on the website too later.
         history.goBack();
     }
 

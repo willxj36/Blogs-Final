@@ -23,7 +23,11 @@ router.get('/:id?', async (req, res, next) => {
 router.post('/', isAuthor, async (req, res, next) => {
     try {
         let {title, content, authorid, tags} = req.body;
-        let response = await db.Blogs.post(title, content, authorid, tags);
+        let response = await db.Blogs.post(title, content, authorid);
+        tags.forEach(tag => {
+            db.BlogTags.post(response.insertId, tag);
+        })
+
         res.send(response);
     } catch(e) {
         console.log(e);
@@ -35,8 +39,11 @@ router.put('/:id', isAuthor, async (req, res, next) => {
     try {
         let {title, content, tags} = req.body;
         let id = Number(req.params.id);
-        db.Blogs.put(title, content, tags, id);
+        await db.Blogs.put(title, content, id);
         res.json({message: 'Blog updated successfully!'});
+        tags.forEach{tag => {
+            await db.BlogTags.post(id, tag);
+        }};
     } catch(e) {
         console.log(e);
         res.sendStatus(500);

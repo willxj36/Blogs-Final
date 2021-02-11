@@ -29,7 +29,7 @@ const AuthorPage: React.FC<RouteComponentProps> = ({ history }) => {
             if(User.role === 'admin' || User.role === 'webmaster') {
                 setBlogs(allBlogs);
             } else {
-                let blogs: Blog[] = allBlogs.filter(blog => { //makes it so that if user is an 'author', only the blogs they posted show up to be edited. For some reason, if I try to access a page an 'author' doesn't have permission for, this part of the page no longer works at all until I log out and back in. Not sure why.
+                let blogs: Blog[] = allBlogs.filter(blog => { //makes it so that if user is an 'author', only the blogs they posted show up to be edited
                     return blog.authorid == User.userid
                 })
                 setBlogs(blogs);
@@ -48,12 +48,12 @@ const AuthorPage: React.FC<RouteComponentProps> = ({ history }) => {
             title,
             content,
             authorid,
-            tags
+            "tags": [tags] //Mobile app allows multiple tags, so server needs an array. Will change site later to accept multiple tags as well
         });
         history.push(`/blogs/${res.insertId}`); //takes you to the newly created blog
     }
 
-    const logout = async () => { //this seems like a janky and/or insecure method to logout, but it's the best I could figure as an extra thing to try and functions fine for the purpose of this lab
+    const logout = async () => {
         localStorage.clear();
         let url = `/auth/logout/${User.userid}`;
         await apiService(url);
