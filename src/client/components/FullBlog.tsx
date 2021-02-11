@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { useState, useEffect } from 'react';
-import { useParams, Link } from 'react-router-dom';
-import apiService, { User } from '../../utils/apiService';
+import { useParams } from 'react-router-dom';
+import apiService from '../../utils/apiService';
 import * as dayjs from 'dayjs';
 import { Blog } from '../../utils/models'
 
@@ -39,7 +39,7 @@ const FullBlog = () => {
                 <img src="/space-stock.jpg" alt="Header image" className="col-5 mb-5 display-inline img-responsive"/>
             </div>
             <h1>{blog.title}</h1>
-            <p><span className="badge badge-warning">{blog.tag}</span></p>
+            <p><span className="badge badge-warning">{blog.tag[0]}</span></p>
             <h4 className="font-italic my-3">By {blog.author}</h4>
             <h4 className="text-muted my-3">{date}</h4>
             <p className="mt-3">{blog.content}</p>

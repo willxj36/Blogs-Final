@@ -36,7 +36,7 @@ const Previews = () => {
                             <h4 className="card-title font-weight-bold">{blog.title}</h4>
                             <h5 className="card-subtitle text-muted my-2">{date}</h5>
                             <h5 className="card-subtitle my-2">{blog.author}</h5>
-                            <h6 className="mt-3"><span className="p-2 badge badge-warning">{blog.tag}</span></h6>
+                            <h6 className="mt-3"><span className="p-2 badge badge-warning">{blog.tag[0]}</span></h6>
                         </div>
                         <div className="card-footer bg-white">
                             <Link to={`/blogs/${blog.id}`} className="btn btn-primary mb-1">View Blog</Link>

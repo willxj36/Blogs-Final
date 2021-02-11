@@ -41,9 +41,9 @@ router.put('/:id', isAuthor, async (req, res, next) => {
         let id = Number(req.params.id);
         await db.Blogs.put(title, content, id);
         res.json({message: 'Blog updated successfully!'});
-        tags.forEach{tag => {
+        tags.forEach(async (tag: string) => {
             await db.BlogTags.post(id, tag);
-        }};
+        });
     } catch(e) {
         console.log(e);
         res.sendStatus(500);
