@@ -9,7 +9,7 @@ const put = async (title: string, content: string, tags: string, id: number) => 
     await Query('UPDATE blogtags SET tagid = (SELECT id FROM tags WHERE name LIKE ?) WHERE blogid = ?', [tags, id]);
 }
 
-const post = async (title: string, content: string, authorid: string, tags: string) => {
+const post = async (title: string, content: string, authorid: string, tags: string[]) => {
     let results = await Query('INSERT INTO blogs SET title = ?, content = ?, authorid = ?', [title, content, authorid]);
     let resultParsed = JSON.parse(JSON.stringify(results));
     Query('INSERT INTO blogtags SET blogid = ?, tagid = (SELECT id FROM tags WHERE name LIKE ?)', [resultParsed.insertId, tags])
