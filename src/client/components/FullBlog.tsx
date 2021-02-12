@@ -16,7 +16,7 @@ const FullBlog = () => {
         author: null,
         authorid: null,
         _created: null,
-        tag: null
+        tag: []
     });
     const [date, setDate] = useState<any>();
 
@@ -33,7 +33,7 @@ const FullBlog = () => {
         setDate(date);
     }, [blog]);
 
-    return (
+    return ( //only first tag will be displayed for now as the backend has changed to allow for multiple, but coding the frontend to adapt is set aside for later
         <div className="container p-5 col-12">
             <div className="row">
                 <img src="/space-stock.jpg" alt="Header image" className="col-5 mb-5 display-inline img-responsive"/>

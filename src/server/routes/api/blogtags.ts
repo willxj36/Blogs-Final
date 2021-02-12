@@ -7,7 +7,9 @@ const router = express.Router();
 router.get('/:id', async (req, res) => {
     try {
         let blogId = Number(req.params.id);
-        let [blogTags] = await db.BlogTags.get(blogId);
+        let blogTagsArray = await db.BlogTags.get(blogId);
+        let blogTagsObj = blogTagsArray[0];
+        let blogTags = blogTagsObj.map((blogTagObj: { name: string; }) => blogTagObj.name);
         res.send(blogTags);
     } catch(e) {
         console.log(e);

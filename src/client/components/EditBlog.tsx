@@ -29,8 +29,8 @@ const EditBlog: React.FC<RouteComponentProps> = ({ history }) => {
             let blog = await apiService(url); //get and set specific blog
             setBlog(blog);
 
-            let currentTag = await apiService(urlCurrentTag); //get blog's current tag to make it default for the select dropdown
-            setCurrentTag(currentTag[0]);
+            let loadedTags = await apiService(urlCurrentTag); //get blog's current tag to make it default for the select dropdown
+            loadedTags.forEach((loadedTag: string) => setCurrentTag((currentTag: string[]) => [...currentTag, loadedTag]));
             
             let tags = await apiService(urlTags); //get all tags
             setTags(tags);
@@ -78,9 +78,9 @@ const EditBlog: React.FC<RouteComponentProps> = ({ history }) => {
             <input onChange={(e) => {handleContent(e.currentTarget.value)}} type="text" name="content" id="content-edit" defaultValue={blog?.content} className="form-control"/>
             <h5 className="form-label mt-4">Tags</h5>
             <select name="tags" id="tags-edit" className="mb-3">
-                <option value={currentTag.name}>{currentTag.name}</option>
+                <option value={currentTag[0]}>{currentTag[0]}</option> 
                 {tags.map(tag => {
-                    if(tag.name !== currentTag.name) { //make a new select box for all tags not current
+                    if(tag.name !== currentTag[0]) { //make a new select box for all tags not current (note that this is only using the first of the current tags; this is a temp fix due to a change in the code for mobile app functionality that will be fixed here later on)
                         return (
                             <option key={tag.id} value={tag.name}>{tag.name}</option>
                         )
