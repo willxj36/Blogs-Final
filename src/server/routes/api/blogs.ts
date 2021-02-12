@@ -59,7 +59,7 @@ router.put('/:id', isAuthor, async (req, res, next) => {
     }
 })
 
-router.delete('/:id', isAuthor, async (req, res) => {
+router.delete('/:id', async (req, res) => {
     try {
         let id = Number(req.params.id);
         db.Blogs.deleter(id);
