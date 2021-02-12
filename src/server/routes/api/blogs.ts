@@ -9,9 +9,15 @@ router.get('/:id?', async (req, res, next) => {
         let id = Number(req.params.id);
         if(id) {
             let [blog] = await db.Blogs.one(id);
+            let tags = await db.BlogTags.get(id);
+            blog.tag = tags; //property is singular because originally only one tag was allowed per post and changing the types everywhere would be a nightmare
             res.send(blog);
         } else {
             let blogs = await db.Blogs.all();
+            blogs.forEach(async blog => {
+                let tags = await db.BlogTags.get(blog.id);
+                blog.tag = tags;
+            });
             res.send(blogs);
         }
     } catch(e) {

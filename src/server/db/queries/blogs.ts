@@ -1,8 +1,8 @@
 import { Query } from '../';
 
-const all = async () => await Query('SELECT b.id, b.title, b.content, b.authorid, a.name as author, t.name as tag, b._created FROM blogs b JOIN authors a ON a.id = b.authorid JOIN blogtags bt ON bt.blogid = b.id JOIN tags t ON t.id = bt.tagid ORDER BY id DESC');
+const all = async () => await Query('SELECT b.id, b.title, b.content, b.authorid, a.name as author, b._created FROM blogs b JOIN authors a ON a.id = b.authorid ORDER BY id DESC');
 
-const one = async (id: number) => await Query('SELECT b.title, b.content, b.authorid, a.name as author, t.name as tag, b._created FROM blogs b JOIN authors a ON a.id = b.authorid JOIN blogtags bt ON bt.blogid = b.id JOIN tags t ON t.id = bt.tagid WHERE b.id = ?', [id]);
+const one = async (id: number) => await Query('SELECT b.title, b.content, b.authorid, a.name as author, b._created FROM blogs b JOIN authors a ON a.id = b.authorid WHERE b.id = ?', [id]);
 
 const put = async (title: string, content: string, id: number) => {
     let result = await Query('UPDATE blogs SET title = ?, content = ? WHERE id = ?', [title, content, id]);
