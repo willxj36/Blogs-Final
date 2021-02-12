@@ -27,7 +27,6 @@ router.post('/', isAuthor, async (req, res, next) => {
         tags.forEach((tag: string) => {
             db.BlogTags.post(response.insertId, tag);
         })
-
         res.send(response);
     } catch(e) {
         console.log(e);

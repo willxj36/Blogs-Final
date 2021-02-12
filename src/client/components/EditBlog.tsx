@@ -4,6 +4,7 @@ import { useParams, RouteComponentProps } from 'react-router-dom';
 import apiService, { User } from '../../utils/apiService';
 import $ from 'jquery';
 import { Blog } from '../../utils/models';
+import blogtags from '../../server/db/queries/blogtags';
 
 const EditBlog: React.FC<RouteComponentProps> = ({ history }) => {
 
@@ -53,10 +54,14 @@ const EditBlog: React.FC<RouteComponentProps> = ({ history }) => {
 
     const handleEdit = async () => {
         let newTag = $('#tags-edit').val();
+        let tags = []; //Mobile app allows multiple tags and thus the server requires the tags in an array. Will probably experiment with implementing this on the website too later.
+        tags.push(newTag);
         await apiService(url, 'PUT', {
             title,
             content,
-            "tags": [newTag]}); //Mobile app allows multiple tags and thus the server requires the tags in an array. Will probably experiment with implementing this on the website too later.
+            tags, 
+            "authorid": blog.authorid
+        });
         history.goBack();
     }
 
