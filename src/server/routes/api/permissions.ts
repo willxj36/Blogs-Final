@@ -1,7 +1,9 @@
 import { RequestHandler } from 'express-serve-static-core';
 
 export const isAuthor: RequestHandler = (req: any, res, next) => {
-    if(req.user.role) {     //mobile app doesn't seem to be sending a req.user, so for now given that the info here is not sensitive, the mobile requests will be sent through the 2nd part of this if/else
+    console.log(req.user);
+    console.log(req.body);
+    if(req.user) {     //mobile app doesn't seem to be sending a req.user, so for now given that the info here is not sensitive, the mobile requests will be sent through the 2nd part of this if/else
         if(!req.user || req.user.role === 'guest') { //if no user object is attached, or user is a guest, reject request
             return res.sendStatus(401);
         } else if(req.user.role === 'author' && req.params.id) {  //verifies that 'author' roles can only edit or delete their own posts, but 'admin' and 'webmaster' can do so with any post

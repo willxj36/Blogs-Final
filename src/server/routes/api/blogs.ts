@@ -24,8 +24,8 @@ router.post('/', isAuthor, async (req, res, next) => {
     try {
         let {title, content, authorid, tags} = req.body;
         let response = await db.Blogs.post(title, content, authorid);
-        tags.forEach((tag: string) => {
-            db.BlogTags.post(response.insertId, tag);
+        tags.forEach(async (tag: string) => {
+            await db.BlogTags.post(response.insertId, tag);
         })
         res.send(response);
     } catch(e) {
