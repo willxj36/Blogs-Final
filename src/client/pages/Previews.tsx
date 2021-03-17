@@ -1,11 +1,9 @@
 import * as React from 'react';
 import { useEffect, useState } from 'react';
-import * as dayjs from 'dayjs';
-import { Link } from 'react-router-dom';
 
 import apiService, { User } from '../../utils/apiService';
 import { Blog } from '../../utils/models';
-import PreviewCard from './PreviewCard';
+import PreviewCard from '../components/PreviewCard';
 
 const url = '/api/blogs'
 

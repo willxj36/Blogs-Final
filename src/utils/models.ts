@@ -21,3 +21,10 @@ export interface User {
     role?: string
     id?: number
 }
+
+export interface IColorTheme {
+    background?: string,
+    cardBackground?: string,
+    text?: string | null,
+    gray?: string
+}
