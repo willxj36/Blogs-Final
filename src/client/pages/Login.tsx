@@ -1,9 +1,14 @@
 import * as React from 'react';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useContext } from 'react';
 import { RouteComponentProps, Link } from 'react-router-dom';
+
 import apiService, { SetAccessToken, User } from '../../utils/apiService';
 
+import { DarkMode, IContextDark } from '../components/ContextProvider';
+
 const Login: React.FC<RouteComponentProps> = ({ history }) => {
+
+    const [colors, ] = useContext<IContextDark>(DarkMode);
 
     const [email, setEmail] = useState<string>('');
     const [password, setPassword] = useState<string>('');
@@ -45,15 +50,17 @@ const Login: React.FC<RouteComponentProps> = ({ history }) => {
     }
 
     return(
-        <div className="col-6 container shadow border">
-            <h5 className="form-label mt-4">Email</h5>
-            <input onChange={(e) => handleEmail(e.currentTarget.value)} type="text" name="email" id="email" className="form-control"/>
-            <h5 className="form-label mt-4">Password</h5>
-            <input type="password" onChange={(e) => handlePassword(e.currentTarget.value)} name="password" id="password" className="form-control"/>
-            <div className="row">
-                <button onClick={handleSubmit} className="btn btn-secondary m-3">Login</button>
-                <Link to='/register' className="btn btn-secondary-outline m-3">New? Register an account here</Link>
-                <button onClick={() => history.push('/')} className="btn btn-warning ml-auto my-3 mr-3">Go back to Home</button>
+        <div className={`pt-4 bg-${colors.background} min-vh-100`}>
+            <div className={`pt-2 col-6 container shadow ${colors.cardBorder} bg-${colors.cardBackground}`}>
+                <h5 className={`form-label ${colors.text}`}>Email</h5>
+                <input onChange={(e) => handleEmail(e.currentTarget.value)} type="text" name="email" id="email" className="form-control"/>
+                <h5 className={`form-label mt-4 ${colors.text}`}>Password</h5>
+                <input type="password" onChange={(e) => handlePassword(e.currentTarget.value)} name="password" id="password" className="form-control"/>
+                <div className="row">
+                    <button onClick={handleSubmit} className={`btn btn-${colors.button} m-3`}>Login</button>
+                    <Link to='/register' className={`btn btn-secondary-outline m-3 ${colors.text}`}>New? Register an account here</Link>
+                    <button onClick={() => history.push('/')} className="btn btn-warning ml-auto my-3 mr-3">Go back to Home</button>
+                </div>
             </div>
         </div>
     )

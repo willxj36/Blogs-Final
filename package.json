@@ -33,6 +33,7 @@
     "@types/stripe": "^8.0.417",
     "bcrypt": "^5.0.0",
     "bootstrap": "^4.5.0",
+    "bootstrap-switch-button-react": "^1.2.0",
     "cors": "^2.8.5",
     "css-loader": "^1.0.1",
     "dayjs": "^1.10.4",

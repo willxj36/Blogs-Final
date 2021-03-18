@@ -1,12 +1,16 @@
 import * as React from 'react';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useContext } from 'react';
 import { RouteComponentProps, Link } from 'react-router-dom';
 import apiService, { User } from '../../utils/apiService';
 import $ from 'jquery';
 import dayjs from 'dayjs';
 import { Blog } from '../../utils/models';
 
+import { DarkMode, IContextDark } from '../components/ContextProvider';
+
 const AuthorPage: React.FC<RouteComponentProps> = ({ history }) => {
+
+    const [colors, ] = useContext<IContextDark>(DarkMode);
 
     const [tags, setTags] = useState([]);
     const [blogs, setBlogs] = useState<Array<Blog>>([]);
@@ -63,18 +67,18 @@ const AuthorPage: React.FC<RouteComponentProps> = ({ history }) => {
 
     if(User.role === 'admin' || User.role === 'author' || User.role === 'webmaster') {
         return ( //may try to make it so that User also carries actual author name at some point, for now userid will work as a stand-in
-            <>
-                <div className="col container shadow border">
+            <div className={`bg-${colors.background}`}>
+                <div className={`col container shadow ${colors.cardBorder} bg-${colors.cardBackground}`}>
                     <div className="row">
-                        <h5 className="form-label ml-3 mt-4">Logged in as: {User.userid}</h5> 
+                        <h5 className={`form-label ml-3 mt-4 ${colors.text}`}>Logged in as: {User.userid}</h5> 
                         <button onClick={logout} className="btn btn-warning align-self-center mt-3 ml-auto mr-3">Logout</button>
                         { User.role === 'admin' || User.role === 'webmaster' ? <Link to="/adminpage" className="btn btn-warning align-self-center mt-3 mr-3">Users Admin Options</Link> : null }
                     </div>
-                    <h5 className="form-label mt-4">Title</h5>
-                    <input onChange={(e) => handleTitle(e.currentTarget.value)} type="text" name="title" id="title" className="form-control"/>
-                    <h5 className="form-label mt-4">Content</h5>
-                    <textarea onChange={(e) => handleContent(e.currentTarget.value)} rows={6} name="content" id="content" className="form-control"/>
-                    <h5 className="form-label mt-4">Tags</h5>
+                <h5 className={`form-label mt-4 ${colors.text}`}>Title</h5>
+                    <input onChange={(e) => handleTitle(e.currentTarget.value)} type="text" name="title" id="title" className={`form-control bg-${colors.gray} ${colors.text}`}/>
+                <h5 className={`form-label mt-4 ${colors.text}`}>Content</h5>
+                    <textarea onChange={(e) => handleContent(e.currentTarget.value)} rows={6} name="content" id="content" className={`form-control bg-${colors.gray} ${colors.text}`}/>
+                <h5 className={`form-label mt-4 ${colors.text}`}>Tags</h5>
                     <select name="tags" id="tags" className="mb-3">
                         <option value="" id="defaultTag">-- Please select a tag --</option>
                         {tags.map(tag => {
@@ -84,32 +88,34 @@ const AuthorPage: React.FC<RouteComponentProps> = ({ history }) => {
                         })}
                     </select>
                     <div className="row">
-                        <button onClick={handleSubmit} className="btn btn-secondary m-3">Submit New Blog</button>
+                        <button onClick={handleSubmit} className={`btn btn-${colors.button} m-3`}>Submit New Blog</button>
                         <button onClick={() => history.goBack()} className="btn btn-warning ml-auto my-3 mr-3">Go back</button>
                     </div>
                 </div>
-                <div className="col container">
-                    <h3 className="my-3">Click on a blog below to edit or delete</h3>
+                <div className={`col container bg-${colors.background}`}>
+                    <h3 className={`my-3 ${colors.text}`}>Click on a blog below to edit or delete</h3>
                         {blogs.map(blog => {
                             let created = dayjs(`${blog._created}`).format('MMM DD, YYYY');
                             return(
                                 <Link to={`/blogs/${blog.id}/edit`} key={blog.id}>
-                                    <div className="card m-3 p-3 col-6">
-                                        <h4 className="card-title">{blog.title}</h4>
-                                        <h5 className="card-subtitle">{created}</h5>
+                                    <div className={`card m-3 p-3 col-6 bg-${colors.cardBackground}`}>
+                                        <h4 className={`card-title ${colors.text}`}>{blog.title}</h4>
+                                        <h5 className={`card-subtitle ${colors.text}`}>{created}</h5>
                                     </div>
                                 </Link>
                             );
                         })}
                 </div>
-            </>
+            </div>
         )
     } else {
         return (
-            <div className="col container shadow border">
-                <div className="row">
-                    <h3 className="m-3 p-3">Welcome to the author page! An admin will need to grant you author permissions before you can post here.</h3>
-                    <button onClick={logout} className="btn btn-warning align-self-center my-3 ml-auto mr-3">Logout</button>
+            <div className={`bg-${colors.background} min-vh-100`}>
+                <div className={`col container shadow ${colors.cardBorder} bg-${colors.cardBackground}`}>
+                    <div className="row">
+                        <h3 className={`m-3 p-3 ${colors.text}`}>Welcome to the author page! An admin will need to grant you author permissions before you can post here.</h3>
+                        <button onClick={logout} className="btn btn-warning align-self-center my-3 ml-auto mr-3">Logout</button>
+                    </div>
                 </div>
             </div>
         )

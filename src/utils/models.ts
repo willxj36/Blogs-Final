@@ -26,5 +26,7 @@ export interface IColorTheme {
     background?: string,
     cardBackground?: string,
     text?: string | null,
-    gray?: string
+    gray?: string,
+    button?: string,
+    cardBorder?: string
 }

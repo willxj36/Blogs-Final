@@ -1,13 +1,17 @@
 import * as React from 'react';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useContext } from 'react';
 
 import apiService, { User } from '../../utils/apiService';
 import { Blog } from '../../utils/models';
 import PreviewCard from '../components/PreviewCard';
 
+import { DarkMode, IContextDark } from '../components/ContextProvider';
+
 const url = '/api/blogs'
 
 const Previews = () => {
+
+    const [colors, ] = useContext<IContextDark>(DarkMode);
 
     const [blogs, setBlogs] = useState<Array<Blog>>([]);
 
@@ -24,7 +28,7 @@ const Previews = () => {
     }, []);
 
     return (
-        <div className="container col-12 row">
+        <div className={`container col-12 row bg-${colors.background}`}>
             {blogs.map(blog => (
                 <PreviewCard blog={blog} />
             ))}
