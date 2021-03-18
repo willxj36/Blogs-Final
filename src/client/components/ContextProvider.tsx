@@ -29,7 +29,7 @@ export const ContextProvider: React.FC = (props) => {
                 background: 'darkbg',
                 cardBackground: 'midnight',
                 text: 'text-white',
-                gray: 'medgray',
+                gray: 'dark',
                 button: 'dark',
                 cardBorder: 'border-dark'
             });

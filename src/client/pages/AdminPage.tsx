@@ -43,7 +43,7 @@ const AdminPage: React.FC<RouteComponentProps> = ({ history }) => {
                             <h5 className={colors.text}>Author Name: {user.name}</h5>
                             <h5 className={colors.text}>Author Email: {user.email}</h5>
                             <div className="row my-2">
-                                {user.role === 'webmaster' ? <h5 className={`ml-3 ${colors.text}`}>Page Owner i.e. Supreme Leader of this page</h5> : <select className="mx-3" name="role" id={`role${user.id}`}>
+                                {user.role === 'webmaster' ? <h5 className={`ml-3 ${colors.text}`}>Page Owner</h5> : <select className="mx-3" name="role" id={`role${user.id}`}>
                                     <option value={user.role}>{user.role}</option>
                                     <option value="admin">admin</option>
                                     <option value="author">author</option>
